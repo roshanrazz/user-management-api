@@ -1,6 +1,6 @@
 package com.roshan.controller;
 
-import java.util.List;
+import java.time.format.DateTimeParseException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.roshan.entity.User;
+import com.roshan.exception.DuplicateEmailException;
+import com.roshan.exception.DuplicateUsernameException;
+import com.roshan.exception.InvalidDateOfBirthException;
+import com.roshan.exception.UserNotFoundException;
 import com.roshan.service.UserService;
 
 @RestController
@@ -28,7 +32,7 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("")
-	public ResponseEntity<User> addUser(@RequestBody User user){
+	public ResponseEntity<?> addUser(@RequestBody User user) throws DuplicateEmailException, DuplicateUsernameException, InvalidDateOfBirthException{
 		return new ResponseEntity<User>(userService.addUser(user),HttpStatus.CREATED);
 	}
 	
@@ -38,32 +42,33 @@ public class UserController {
 	}
 	
 	@GetMapping("/{username}")
-	public ResponseEntity<User> getUserByUsername(@PathVariable String username){
+	public ResponseEntity<?> getUserByUsername(@PathVariable String username) throws UserNotFoundException{
 		return ResponseEntity.ok(userService.getUserByUsername(username));
+		
 	}
 	
 	@GetMapping("/first-name/{firstName}")
-	public ResponseEntity<List<User>> getUsersByFirstName(@PathVariable String firstName){
-		return new ResponseEntity<List<User>>(userService.getUsersByFirstName(firstName),HttpStatus.OK);
+	public ResponseEntity<Page<User>> getUsersByFirstName(@PathVariable String firstName,Pageable pageable){
+		return new ResponseEntity<Page<User>>(userService.getUsersByFirstName(firstName,pageable),HttpStatus.OK);
 	}
 	
 	@GetMapping("/last-name/{lastName}")
-	public ResponseEntity<List<User>> getUsersByLastName(@PathVariable String lastName){
-		return new ResponseEntity<List<User>>(userService.getUsersByLastName(lastName),HttpStatus.OK);
+	public ResponseEntity<Page<User>> getUsersByLastName(@PathVariable String lastName,Pageable pageable){
+		return new ResponseEntity<Page<User>>(userService.getUsersByLastName(lastName,pageable),HttpStatus.OK);
 	}
 	
 	@GetMapping("/email/{email}")
-	public ResponseEntity<User> getUserByEmail(@PathVariable String email){
+	public ResponseEntity<?> getUserByEmail(@PathVariable String email) throws UserNotFoundException{
 		return ResponseEntity.ok(userService.getUserByEmail(email));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable UUID id,@RequestBody User newUser){
+	public ResponseEntity<?> updateUser(@PathVariable UUID id,@RequestBody User newUser) throws UserNotFoundException, InvalidDateOfBirthException{
 		return new ResponseEntity<User>(userService.updateUser(id, newUser),HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<User> deleteUser(@PathVariable UUID id){
+	public ResponseEntity<User> deleteUser(@PathVariable UUID id) throws UserNotFoundException{
 		return ResponseEntity.ok(userService.deleteUser(id));
 	}
 

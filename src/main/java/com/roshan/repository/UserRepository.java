@@ -1,6 +1,5 @@
 package com.roshan.repository;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -15,10 +14,14 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
 	User findByUsername(String username);
 
-	List<User> findByFirstName(String firstName);
+	Page<User> findByFirstName(String firstName,Pageable pageable);
 
-	List<User> findByLastName(String lastName);
+	Page<User> findByLastName(String lastName,Pageable pageable);
 
 	User findByEmail(String email);
+
+	boolean existsByUsername(String username);
+
+	boolean existsByEmail(String email);
 
 }
