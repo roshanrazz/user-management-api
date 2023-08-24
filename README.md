@@ -31,7 +31,7 @@ Username : admin
 password : admin123
 
 ## Endpoints
-
+### You can use live link as it is deployed on server. Just replace localhost with 129.146.33.61. Cannot gurantee if it works all the time.
 ### Get jwt token 
 POST -> http://localhost:8080/auth/login
 
