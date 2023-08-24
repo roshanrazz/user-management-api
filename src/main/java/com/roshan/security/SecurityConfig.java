@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
@@ -30,7 +31,7 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
         .cors(cors -> cors.disable())
-        .authorizeHttpRequests(auth -> auth.requestMatchers(mvc.pattern("/auth/login"),mvc.pattern(HttpMethod.POST,"/api/users"),mvc.pattern("/v3/api-docs/**"),mvc.pattern("/swagger-ui/**")).permitAll().anyRequest().authenticated())
+        .authorizeHttpRequests(auth -> auth.requestMatchers(mvc.pattern("/auth/login"),mvc.pattern(HttpMethod.POST,"/api/users"),mvc.pattern("/v3/api-docs/**"),mvc.pattern("/swagger-ui/**"),AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll().anyRequest().authenticated())
         .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
