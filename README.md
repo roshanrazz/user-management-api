@@ -7,6 +7,16 @@ A full documentation is created using swagger which can be accessed using http:/
 
 Spring Security is implemented using jwt and authentication and authorization. You need to use postman with authorization header set else you will gwt access denied to api endpoints.
 
+Running the project
+1. git clone https://github.com/roshanrazz/reward-points
+2. Open in editor like eclipse, spring-tool-suite,intelliJ IDEA, preferably spring-tool-suite as I have used for creation.
+3. Right click on project. Goto -> Run As -> Maven Build.
+4. In Goals type spring-boot:run and run the project.
+Alternatively run the project from command prompt using mvn spring-boot:run command.
+5. Also project can be run from Dockerfile provided in project.
+6. You can also run project from docker image pushed in my docker hub repository by using -> docker pull roshanrazz/reward-points
+7. Lastly you can use live link as it is deployed on server. Just replace localhost with 129.146.132.231. Cannot gurantee if it works all the time
+
 ## Credentials
 ### Role User
 Username : roshan
