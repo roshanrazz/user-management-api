@@ -3,7 +3,7 @@
 
 This  project is built using java spring boot. This is an api to manage user using endpoints. H2 inmemory database is used as database for the project with default credentials.
 
-A full documentation is created using swagger which can be accessed using http://localhost:8080/swagger-ui/index.html
+A full documentation is created using swagger which can be accessed using http://localhost:8080/swagger-ui/index.html or with live server http://129.146.33.61:8080/swagger-ui/index.html
 
 Spring Security is implemented using jwt and authentication and authorization. You need to use postman with authorization header set else you will gwt access denied to api endpoints.
 
