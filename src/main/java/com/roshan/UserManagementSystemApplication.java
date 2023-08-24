@@ -23,7 +23,7 @@ public class UserManagementSystemApplication {
 	              .info(new Info().title("User Management Api Created By Roshan")
 	              .description("User Management Api")
 	              .version("v1.0.0")
-	              .license(new License().name("Source Code").url("https://github.com/roshanrazz/user-management-api")))
+	              .license(new License().name("Source Code (GitHub)").url("https://github.com/roshanrazz/user-management-api")))
 	              .externalDocs(new ExternalDocumentation()
 	              .description("Contact me here")
 	              .url("https://www.linkedin.com/in/roshansah/"));

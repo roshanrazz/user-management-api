@@ -25,16 +25,15 @@ public class UserService {
 		return userRepository.findAll(pageable);
 	}
 
-	public User addUser(User user) throws DuplicateEmailException, DuplicateUsernameException, InvalidDateOfBirthException {
+	public User addUser(User user)
+			throws DuplicateEmailException, DuplicateUsernameException, InvalidDateOfBirthException {
 		if (userRepository.existsByEmail(user.getEmail())) {
 			throw new DuplicateEmailException("Email address already Used");
-		}
-		else if (userRepository.existsByUsername(user.getUsername())) {
+		} else if (userRepository.existsByUsername(user.getUsername())) {
 			throw new DuplicateUsernameException("Username already used");
-		}
-		else if (user.getDateOfBirth().isAfter(LocalDate.now())) {
+		} else if (user.getDateOfBirth().isAfter(LocalDate.now())) {
 			throw new InvalidDateOfBirthException("Future date cannot be date of birth");
-		}else {
+		} else {
 			return userRepository.saveAndFlush(user);
 		}
 
@@ -65,20 +64,17 @@ public class UserService {
 	}
 
 	public User updateUser(UUID id, User newUser) throws UserNotFoundException, InvalidDateOfBirthException {
-		User oldUser = userRepository.findById(id).orElse(null);
-		if (oldUser != null) {
-			if (newUser.getDateOfBirth().isAfter(LocalDate.now())) {
-				throw new InvalidDateOfBirthException("Future date cannot be date of birth");
-			}
-			oldUser.setFirstName(newUser.getFirstName());
-			oldUser.setLastName(newUser.getLastName());
-			oldUser.setDateOfBirth(newUser.getDateOfBirth());
-			oldUser.setEmail(newUser.getEmail());
-			oldUser.setUsername(newUser.getUsername());
-			return userRepository.saveAndFlush(oldUser);
-		}else {
-			throw new UserNotFoundException("User not Found");
+		User oldUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not Found"));
+		if (newUser.getDateOfBirth().isAfter(LocalDate.now())) {
+			throw new InvalidDateOfBirthException("Future date cannot be date of birth");
 		}
+		oldUser.setFirstName(newUser.getFirstName());
+		oldUser.setLastName(newUser.getLastName());
+		oldUser.setDateOfBirth(newUser.getDateOfBirth());
+		oldUser.setEmail(newUser.getEmail());
+		oldUser.setUsername(newUser.getUsername());
+		return userRepository.saveAndFlush(oldUser);
+
 	}
 
 	public User deleteUser(UUID id) throws UserNotFoundException {
