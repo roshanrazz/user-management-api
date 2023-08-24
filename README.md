@@ -5,7 +5,7 @@ This  project is built using java spring boot. This is an api to manage user usi
 
 A full documentation is created using swagger which can be accessed using http://localhost:8080/swagger-ui/index.html
 
-Spring Security is implemented using jwt and authentication and authorization.
+Spring Security is implemented using jwt and authentication and authorization. You need to use postman with authorization header set else you will gwt access denied to api endpoints.
 
 ## Credentials
 ### Role User
