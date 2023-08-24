@@ -37,7 +37,7 @@ public class UserController {
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/all")
+	@GetMapping("")
 	public ResponseEntity<Page<User>> findAllUsers(Pageable pageable){
 		return new ResponseEntity<Page<User>>(userService.listAllUsers(pageable),HttpStatus.OK);
 	}

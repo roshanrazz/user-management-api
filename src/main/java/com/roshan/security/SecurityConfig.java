@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,7 +30,7 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
         .cors(cors -> cors.disable())
-        .authorizeHttpRequests(auth -> auth.requestMatchers(mvc.pattern("/auth/login"),mvc.pattern("/api/users")).permitAll().anyRequest().authenticated())
+        .authorizeHttpRequests(auth -> auth.requestMatchers(mvc.pattern("/auth/login"),mvc.pattern(HttpMethod.POST,"/api/users"),mvc.pattern("/v3/api-docs/**"),mvc.pattern("/swagger-ui/**")).permitAll().anyRequest().authenticated())
         .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
