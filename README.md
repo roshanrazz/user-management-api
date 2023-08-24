@@ -15,7 +15,7 @@ Spring Security is implemented using jwt and authentication and authorization. Y
 #### Alternatively run the project from command prompt using mvn spring-boot:run command.
 #### 5. Also project can be run from Dockerfile provided in project.
 #### 6. You can also run project from docker image pushed in my docker hub repository by using -> docker pull roshanrazz/user-api
-#### 7. Lastly you can use live link as it is deployed on server. Just replace localhost with 129.146.132.231. Cannot gurantee if it works all the time
+#### 7. Lastly you can use live link as it is deployed on server. Just replace localhost with 129.146.33.61 , Cannot gurantee if it works all the time
 
 ### Note : Port 8080 should be open else you need to change the port in application.properties
 
@@ -40,6 +40,7 @@ Authorization: Bearer {jwt_token_here}
 
 ### List all users (only admin feature)
 GET -> http://localhost:8080/api/users
+
 ### Get a single user
 GET -> http://localhost:8080/api/users/{username}
 ### Add user (No jwt token required to create user)
