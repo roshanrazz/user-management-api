@@ -26,9 +26,9 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleInavalidDateOfBirthException(InvalidDateOfBirthException ex){
 		return ResponseEntity.badRequest().body(ex.getMessage());
 	}
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<String> handleException(Exception ex){
-		return ResponseEntity.internalServerError().body("Internal Server Error");
-	}
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<String> handleException(Exception ex){
+//		return ResponseEntity.internalServerError().body("Internal Server Error");
+//	}
 	
 }
